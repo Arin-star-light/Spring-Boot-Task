@@ -15,13 +15,6 @@ import com.arin.task.dto.PostRequestBodyDto;
 @RequestMapping("api/v1")
 public class MainController {
 
-    @PostMapping("task")
-    public String postMetod(@RequestBody PostRequestBodyDto requestBody){
-        
-        return "일정이름 : " +  requestBody.getName() + "카테고리 : " + requestBody.getCategory() + 
-        "설명 : " + requestBody.getText() + "날짜 : " + requestBody.getDate() + "시간 : " + requestBody.getTime();
-    }
-
     @GetMapping("/task/{taskNumber}")
     public String getPathVariable(
         @PathVariable("taskNumber")String taskNumber 
@@ -29,10 +22,14 @@ public class MainController {
         return "Parameter value : " + taskNumber;
     }
 
+    @PostMapping("task")
+    public String postMetod(@RequestBody PostRequestBodyDto requestBody){
+        return "일정 작성" + requestBody.getName() + " " + requestBody.getCategory() + " " + requestBody.getText() + " " + requestBody.getDate() + " " + requestBody.getTime();
+    }
+
     @PatchMapping("/task/{taskNumber}")
     public String PatchMetod(@RequestBody PostRequestBodyDto requestBody){
-       return "일정이름 : " +  requestBody.getName() + "카테고리 : " + requestBody.getCategory() + 
-        "설명 : " + requestBody.getText() + "날짜 : " + requestBody.getDate() + "시간 : " + requestBody.getTime();
+        return "일정 수정" + requestBody.getName() + " " + requestBody.getCategory() + " " + requestBody.getText() + " " + requestBody.getDate() + " " + requestBody.getTime();
     }
 
     @DeleteMapping("/task/{taskNumber}")
